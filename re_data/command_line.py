@@ -52,10 +52,13 @@ def get_target_paths(kwargs, re_data_target_dir=None):
     
     project_dict = yaml.safe_load(Path(os.path.join(project_root, 'dbt_project.yml')).read_text())
 
+    print(project_dict.get('target-path'))
+
     dbt_target_path = os.path.join(
                         project_root,
-                        project_dict['target-path']
+                        project_dict.get('target-path', 'target')
                         )
+    
     if re_data_target_dir:
         re_data_target_path = os.path.join(project_root,re_data_target_dir)
     else:
